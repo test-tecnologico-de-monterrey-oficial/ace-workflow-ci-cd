@@ -1,0 +1,51 @@
+name: Continuous Deployment Develop
+
+on:
+  pull_request:
+    branches: 
+      - develop
+      
+  workflow_dispatch:
+  
+env:
+  PROJECT_NAME: TEST_APP_CI_CD
+  SERVER_NAME: ${{ secrets.SERVER_NAME }}
+  CONNECTION_BROKER_PASSWORD: ${{ secrets.IIB_DEVL_CONNECTION_BROKER_PASSWORD }}
+  CONNECTION_BROKER_PATH: ${{ secrets.IIB_DEVL_CONNECTION_BROKER_PATH }}
+  PACKAGE_SCRIPT_PATH: ${{ secrets.IIB_PACKAGE_SCRIPT_PATH }}
+  DEPLOY_SCRIPT_PATH: ${{ secrets.IIB_DEPLOY_SCRIPT_PATH }}
+  CLEAN_SCRIPT_PATH: ${{ secrets.IIB_CLEAN_SCRIPT_PATH }}
+
+jobs:
+  package:
+    runs-on: [self-hosted, linux, x64, BUS]
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generar archivo bar de despliegue
+        run: |
+          chmod +x $PACKAGE_SCRIPT_PATH 
+          $PACKAGE_SCRIPT_PATH
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.PROJECT_NAME }}
+          path: ${{ github.workspace }}/bar/${{ env.PROJECT_NAME }}.bar      
+  deploy:
+    runs-on: [self-hosted, linux, x64, BUS]
+    timeout-minutes: 5
+    needs: package
+    steps:
+      - name: Realizar despliegue a IBM Integration Bus
+        run: |
+          chmod +x $DEPLOY_SCRIPT_PATH 
+          $DEPLOY_SCRIPT_PATH
+  clean:
+    runs-on: [self-hosted, linux, x64, BUS]
+    timeout-minutes: 5
+    if: ${{ always() }}
+    needs: deploy
+    steps:
+      - name: Remover directorio y archivos del respositorio
+        run: |
+          chmod +x $CLEAN_SCRIPT_PATH 
+          $CLEAN_SCRIPT_PATH

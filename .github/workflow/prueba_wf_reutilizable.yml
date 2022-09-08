@@ -11,7 +11,7 @@ on:
         required: true
 jobs:
   print-username:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
 
     steps:
       - name: Print the input name to STDOUT

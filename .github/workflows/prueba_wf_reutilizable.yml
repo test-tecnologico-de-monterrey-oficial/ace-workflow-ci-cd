@@ -7,9 +7,9 @@ on:
         required: true
         type: string
 jobs:
-  print-username:
+  print-SERVER_NAME:
     runs-on: [self-hosted, linux, x64, BUS]
-
+    timeout-minutes: 5
     steps:
       - name: Print the input name to STDOUT
-        run: echo The username is ${{ inputs.SERVER_NAME }}
+        run: echo The SERVER_NAME is ${{ inputs.SERVER_NAME }}

@@ -9,6 +9,6 @@ on:
   
 jobs: 
   call-workflow-passing-data:
-    uses: MarcRodriguez91/ace-workflow-ci-cd/.github/workflows/prueba_wf_reutilizable.yml@v1
+    uses: ./.github/workflows/prueba_wf_reutilizable.yml
     with:
       SERVER_NAME: server

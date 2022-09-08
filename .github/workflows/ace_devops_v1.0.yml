@@ -1,11 +1,12 @@
 name: Continuous Deployment Develop
 
 on:
-  pull_request:
-    branches: 
-      - develop
-      
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      SERVER_NAME:
+        description: 'Nombre del Servidor de Integracion, donde se realizara el despliegue'
+        required: false
+        type: string
   
 env:
   PROJECT_NAME: TEST_APP_CI_CD

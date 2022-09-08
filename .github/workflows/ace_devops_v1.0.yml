@@ -7,10 +7,6 @@ on:
         description: 'Nombre del proyecto o Aplicación Principal del BUS a procesar'
         required: false
         type: string
-    secrets:
-      SERVER_NAME:
-        description: 'Nombre del Servidor de Integracion, donde se realizara el despliegue'
-        required: true
   
 env:
   PROJECT_NAME: ${{ inputs.PROJECT_NAME }}

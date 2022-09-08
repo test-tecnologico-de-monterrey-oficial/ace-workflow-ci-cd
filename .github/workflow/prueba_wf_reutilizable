@@ -1,0 +1,17 @@
+on:
+  workflow_call:
+    inputs:
+      SERVER_NAME:
+        description: 'Nombre del Servidor de Integracion, donde se realizara el despliegue'
+        required: true
+        type: string
+    secrets:
+      envPAT:
+        required: true
+jobs:
+  print-username:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.username }}

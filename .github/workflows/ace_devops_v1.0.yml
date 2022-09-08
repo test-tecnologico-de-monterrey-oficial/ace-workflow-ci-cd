@@ -10,7 +10,7 @@ on:
   
 env:
   PROJECT_NAME: TEST_APP_CI_CD
-  SERVER_NAME: ${{ secrets.SERVER_NAME }}
+  SERVER_NAME: ${{ inputs.SERVER_NAME }}
   CONNECTION_BROKER_PASSWORD: ${{ secrets.IIB_DEVL_CONNECTION_BROKER_PASSWORD }}
   CONNECTION_BROKER_PATH: ${{ secrets.IIB_DEVL_CONNECTION_BROKER_PATH }}
   PACKAGE_SCRIPT_PATH: ${{ secrets.IIB_PACKAGE_SCRIPT_PATH }}
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Generar archivo bar de despliegue
         run: |
-          echo The PACKAGE_SCRIPT_PATH is ${{ env.PACKAGE_SCRIPT_PATH }}
+          echo The SERVER_NAME is ${{ env.SERVER_NAME }}
           chmod +x $PACKAGE_SCRIPT_PATH 
           $PACKAGE_SCRIPT_PATH
       - uses: actions/upload-artifact@v3

@@ -1,0 +1,14 @@
+name: Continuous Deployment Develop
+
+on:
+  pull_request:
+    branches: 
+      - develop
+      
+  workflow_dispatch:
+  
+jobs: 
+  call-workflow-passing-data:
+    uses: MarcRodriguez91/ace-workflow-ci-cd/.github/workflows/prueba_wf_reutilizable.yml@v1
+    with:
+      SERVER_NAME: server

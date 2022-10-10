@@ -7,6 +7,10 @@ on:
         description: 'Nombre del proyecto o Aplicación Principal del BUS a procesar'
         required: false
         type: string
+      LIBRARY_NAME:
+        description: 'Librería o Librerías que se desea incluir en el empaquetado, separados por espacio ejemplo: LibraryName1 LibraryName2 .... LibraryNamen'
+        required: false
+        type: string
   
 env:
   PROJECT_NAME: ${{ inputs.PROJECT_NAME }}

@@ -11,10 +11,15 @@ on:
         description: 'Librería o Librerías que se desea incluir en el empaquetado, separados por espacio ejemplo: LibraryName1 LibraryName2 .... LibraryNamen'
         required: false
         type: string
+      RUN_CREATE_BAR:
+        description: 'Ejecutar mqsicreatebar para compilar conjuntos de mensajes y código Java, valores permitidos (true, false)'
+        required: false
+        type: string
   
 env:
   PROJECT_NAME: ${{ inputs.PROJECT_NAME }}
   LIBRARY_NAME: ${{ inputs.LIBRARY_NAME }}
+  RUN_CREATE_BAR: ${{ inputs.RUN_CREATE_BAR }}
   SERVER_NAME: ${{ secrets.SERVER_NAME }}
   OVERRIDE_PROPERTIES: ${{ secrets.OVERRIDE_PROPERTIES }}
   CONNECTION_BROKER: ${{ secrets.IIB_DEVL_CONNECTION_BROKER }}
